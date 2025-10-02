@@ -9,7 +9,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
-
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,15 +20,16 @@ import { GraphQLModule } from './graphql.module';
     HttpClientModule,
     GraphQLModule
   ],
-  providers: [HttpLink,Apollo,
+  providers: [Apollo,
      {
       provide: APOLLO_OPTIONS,
-      useFactory: (): ApolloClientOptions<any> => {
+      useFactory: (httpLink: HttpLink): ApolloClientOptions<any> => {
         return {
+          link: httpLink.create({ uri: environment.graphqlUri }),
           cache: new InMemoryCache(),
-          uri: 'http://localhost:4000/graphql', // your GraphQL server
         };
       },
+      deps: [HttpLink],
     },
   ],
   bootstrap: [AppComponent]

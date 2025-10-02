@@ -69,3 +69,14 @@ Best hosting for both = Render (since it supports Node and frontend).
 Client + Server + DB = basic full-stack app.
 
 Modern full-stack apps often involve GraphQL/REST APIs, caching, authentication, devops, and external services.
+
+## generate environmets in client for Render
+ng generate environments
+
+Render deployment Overview:
+
+Deploy server as a Web Service on Render (Node web service).
+
+Deploy client as a Static Site on Render (Angular build output).
+
+Client calls server at the public server URL.

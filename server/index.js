@@ -25,6 +25,9 @@ const resolvers = {
 // Apollo Server
 const server = new ApolloServer({ typeDefs, resolvers });
 
-server.listen({ port: 4000 }).then(({ url }) => {
+//process.env.PORT is required: Render injects the correct port into PORT.
+//4000 for client frontend port, enables CORS for  client domain:
+const PORT = process.env.PORT || 4000;
+server.listen({ port: PORT, cors: { origin: '*' } }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
